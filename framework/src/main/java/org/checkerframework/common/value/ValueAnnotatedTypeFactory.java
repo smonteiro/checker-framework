@@ -228,7 +228,8 @@ public class ValueAnnotatedTypeFactory extends BaseAnnotatedTypeFactory {
 
     @Override
     protected TypeHierarchy createTypeHierarchy() {
-        // This is a lot of code to replace annotations so that annotations that are equivalent
+        // This is a lot of code to replace annotations so that annotations that are
+        // equivalent
         // qualifiers are the same annotation.
         return new DefaultTypeHierarchy(
                 checker,
@@ -247,13 +248,13 @@ public class ValueAnnotatedTypeFactory extends BaseAnnotatedTypeFactory {
                         return super.arePrimeAnnosEqual(type1, type2);
                     }
 
-					private void replaceWithUnknown(AnnotatedTypeMirror type1) {
-						type1.replaceAnnotation(
+                    private void replaceWithUnknown(AnnotatedTypeMirror type1) {
+                        type1.replaceAnnotation(
                                 convertSpecialIntRangeToStandardIntRange(
                                         type1.getAnnotationInHierarchy(UNKNOWNVAL)));
                         type1.replaceAnnotation(
-                        		convertToUnknown(type1.getAnnotationInHierarchy(UNKNOWNVAL)));
-					}
+                                convertToUnknown(type1.getAnnotationInHierarchy(UNKNOWNVAL)));
+                    }
                 };
             }
         };
@@ -376,7 +377,7 @@ public class ValueAnnotatedTypeFactory extends BaseAnnotatedTypeFactory {
      * @param anno annotation mirror from which to get values
      * @return the values in {@code anno} casted to longs
      */
-    /* package-private*/ List<Long> getArrayLenOrIntValue(AnnotationMirror anno) {
+    /* package-private */ List<Long> getArrayLenOrIntValue(AnnotationMirror anno) {
         List<Long> result;
         if (AnnotationUtils.areSameByName(anno, ARRAYLEN_NAME)) {
             List<Integer> intValues = getArrayLength(anno);
@@ -392,8 +393,10 @@ public class ValueAnnotatedTypeFactory extends BaseAnnotatedTypeFactory {
 
     @Override
     protected TreeAnnotator createTreeAnnotator() {
-        // Don't call super.createTreeAnnotator because it includes the PropagationTreeAnnotator.
-        // Only use the PropagationTreeAnnotator for typing new arrays.  The Value Checker
+        // Don't call super.createTreeAnnotator because it includes the
+        // PropagationTreeAnnotator.
+        // Only use the PropagationTreeAnnotator for typing new arrays. The Value
+        // Checker
         // computes types differently for all other trees normally typed by the
         // PropagationTreeAnnotator.
         TreeAnnotator arrayCreation =
